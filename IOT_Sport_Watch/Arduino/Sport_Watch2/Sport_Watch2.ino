@@ -59,8 +59,8 @@ int count=0;
 #include <WiFi.h>
 #include "time.h"
 
-const char* ssid       = "TP-LINK_7F99";
-const char* password   = "5544332211";
+const char* ssid       = "BOB123";
+const char* password   = "open1991525";
 //////////////////////////////////////////////^^^wife^^^//////////////////////////////////////////////////
 #include <HTTPClient.h>
 bool stride_frequency(float total_acc);
@@ -70,8 +70,8 @@ long upload_sec = 0;
 long upload_delta = 0;
 
 const char* serverName = "http://34.92.111.145/demo.php"; //準備上傳到伺服器端的網址名稱"http://34.92.111.145"為伺服器ip所在，"/insertData.php"為準備執行的php檔
-String apiKeyValue = "tPmAT5Ab3j7F9";//php檔中所寫好的apikey，必須和php當中的aipkey相同
-String sensorName = "Max30102";
+String upload_str = "";
+String sensorName = "IOT-watch001";
 String sensorLocation = "Outdoor";
 /////////////////////////////////////////////^^^upload^^^//////////////////////////////////////////
 #define buzzerPin 18
@@ -263,7 +263,8 @@ void loop()
                 while(digitalRead(sp) == LOW);
                 count++;
               }
-            }
+              upload_str = "start";
+           }
            while(count == 2)
           {   
               display.clearDisplay();//清屏
@@ -274,6 +275,22 @@ void loop()
               display.setCursor(45, 50);//设置显示位置 
               display.println("<stop>");
               display.display(); // 开显示
+              if(upload_str == "start")
+              {
+                String httpRequwstData = "upload_str=" + upload_str 
+                                      + "&sensor=" + sensorName
+                                      + "&location=" + sensorLocation 
+                                      + "&Heart_Rate=" + String(beatsPerMinute) 
+                                      + "&Stride_Cadence=" + String(Stride_Cadence)
+                                      + "&Velocity=" + String(Velocity) 
+                                      + "&Distance=" + String(Distance) + "";
+                upload_data_by_http(httpRequwstData);
+                delay(50000);
+                upload_str = "uploading";
+              }
+
+              else if (upload_str == "uploading")
+              {
               long irValue = particleSensor.getIR();//讀取IR光強度
               if (checkForBeat(irValue) == true)
                 {
@@ -298,7 +315,7 @@ void loop()
                   Distance += 0.65;
                 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////                
-              String httpRequwstData = "api_key=" + apiKeyValue 
+              String httpRequwstData = "upload_str=" + upload_str 
                                       + "&sensor=" + sensorName
                                       + "&location=" + sensorLocation 
                                       + "&Heart_Rate=" + String(beatsPerMinute) 
@@ -315,10 +332,20 @@ void loop()
               }
 ////////////////////////////////////////////////////////////////////////////////////////////////////              
               val=digitalRead(sp);
+             }
              if(val==LOW) 
               {
                 delay(200);
                 while(digitalRead(sp) == LOW);
+                upload_str = "end";
+                String httpRequwstData = "upload_str=" + upload_str 
+                                      + "&sensor=" + sensorName
+                                      + "&location=" + sensorLocation 
+                                      + "&Heart_Rate=" + String(beatsPerMinute) 
+                                      + "&Stride_Cadence=" + String(Stride_Cadence)
+                                      + "&Velocity=" + String(Velocity) 
+                                      + "&Distance=" + String(Distance) + "";
+                upload_data_by_http(httpRequwstData);
                 count++;
               }
             }

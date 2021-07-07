@@ -1,23 +1,26 @@
 <?php
-	header("Access-Control-Allow-Origin: *");//這個必寫，否則報錯
-	$mysqli=new mysqli('localhost','root','SD89bK8vC5Pi','User_ESP32_001');//根據自己的資料庫填寫
+session_start();
+header("Access-Control-Allow-Origin: *"); //這個必寫，否則報錯
 
-    
-    
-    $sql = "SELECT id, Velocity FROM D202106151550 order by Reading_time desc limit 40";
-	$res=$mysqli->query($sql);
+$account = $_SESSION['username'];
+$table = $_SESSION['table'];
 
-	$arr=array();
-	while ($row=$res->fetch_assoc()) {
-		$arr[]=$row;
-	}
+$mysqli = new mysqli('localhost', 'root', 'SD89bK8vC5Pi', $account); //根據自己的資料庫填寫
 
-    
 
-	$res->free();
-	//關閉連線
-	$mysqli->close();
-	
-	echo(json_encode($arr));//這裡用echo而不是return
 
-?>
+$sql = "SELECT Reading_time, Velocity FROM `" . $table . "` order by Reading_time desc limit 40";
+$res = $mysqli->query($sql);
+
+$arr = array();
+while ($row = $res->fetch_assoc()) {
+    $arr[] = $row;
+}
+
+$reversedArray = array_reverse($arr);
+
+$res->free();
+//關閉連線
+$mysqli->close();
+
+echo (json_encode($reversedArray));//這裡用echo而不是return

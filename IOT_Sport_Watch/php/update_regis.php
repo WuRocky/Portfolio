@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+</body>
+
+</html>
 <?php session_start(); ?>
 <?php
 require_once "mysql_connect_regis.php";
@@ -18,7 +31,7 @@ if ($_SESSION['username'] != null) {
         //&& $email != null && $number != null && $gender != null && $birthday != null && $height != null && $weight != null
         $account = $_SESSION['username'];
 
-        $sql = "update recording set name='$name', email='$email' where account='$account'";
+        $sql = "UPDATE recording  SET name='$name', email='$email', number='$number', gender='$gender', birthday='$birthday', height='$height', weight='$weight', watch='$watch' WHERE account='$account'";
         //更新對應的帳號，使此筆資料更新到資料表
         if (mysqli_query($conn_regis, $sql)) {
             //echo '修改成功!';

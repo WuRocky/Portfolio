@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -16,8 +17,7 @@
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <!--Google font setting-->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
-    <link href="css/style_members.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 
 </head>
 
@@ -31,87 +31,111 @@
         integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
         crossorigin="anonymous"></script>
 
-
     <!-- 上標籤 -->
-    <header class="page-header">
-        <div class="logo">
+    <header class="page-header wrapper">
+        <div class="container">
+            <div class="logo">
 
-            <a href="#">
-                <img src="./Logo/icons8-intelligent-person-64.png" alt="智能手錶首頁">
-            </a>
-            <h1 class="logo-h1"><a href="./index.php">IoT Watch</a></h1>
+                <a href="./index.php">
+                    <img src="./logo/icons8-intelligent-person-64.png" alt="智能手錶首頁">
+                </a>
+                <h1 class="logo-h1">IoT&nbsp;Watch</h1>
+                <li class="signupbtn"><?php  if (!isset($_SESSION['username'])) : ?><a href="./signup.php"><img src="./Icons/signup.png" /><?php endif ?></li>
+                <li class="loginbtn"><?php  if (!isset($_SESSION['username'])) : ?><a href="./login.php"><img src="./Icons/login.png" /><?php endif ?></li>
+
+            </div>
         </div>
+        <div class="container">
 
+            <nav class="main-nav">
+            <li><a href="./member.php"><?php echo htmlspecialchars($_SESSION["username"]) ?></a></li>
+            <li><?php  if (isset($_SESSION['username'])) : ?><a href="./php/logout.php">登出</a></a><?php endif ?></li>
+                <li><a href="./index.php">首頁</a></li>
 
-
-        <nav class="main-nav">
-            <ul class="main-nav ul">
-                <li><a href="index.php">首頁</a></li>
 
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">裝置介紹</a>
                     <div class="dropdown-content">
-                        <a href="devices.phpc">裝備使用</a>
-                        <a href="features.php">功能介紹</a>
-                        <a href="members.php">成員介紹</a>
+                        <a href="./devices.php">裝備使用</a>
+                        <a href="./features.php">功能介紹</a>
+                        <a href="./members.php">成員介紹</a>
                     </div>
                 </li>
 
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">測量圖</a>
-                    <div class="dropdown-content">
-                        <a href="heart.php">心跳圖</a>
-                        <a href="#">速度</a>
-                        <a href="#">距離</a>
-                    </div>
-                </li>
+                <li><a href="./Datacharts.php">測量圖</a></li>
 
-                <li><a href="#">影片介紹</a></li>
-            </ul>
-        </nav>
+                <li><a href="./video.php">影片介紹</a></li>
+            </nav>
+
+        </div>
 
     </header>
     <!-- 下面右邊內容 -->
     <section>
         <div class="aside">
+            
             <div class="features">
-                <ul>
-                    <li><a href="#"><img class="distance"
-                                src="./Icons/icons8-distance-64.png" /><span>量測距離：<br />量測您移動的距離</span></a>
-                    </li>
-                    <li><a href="#"><img class="footprint"
-                                src="./Icons/icons8-footprint-50.png" /><span>量測步數：<br />量測您行走的步數</span></a>
-                    </li>
-                    <li><a href="#"><img class="temperature" src="./Icons/icons8-temperature-inside-64.png" /><span
-                                class="temperature">量測溫溼度：<br />量測環境溫濕度是否適宜運動</span></a>
-                    </li>
-                    <li><a href="#"> <img class="heart" src="./Icons/icons8-heart-64.png" /><span
-                                class="heart">量測心率：<br />量測您每分鐘的心跳數</span></a>
-                    </li>
-                    <li><a href="#"> <img class="running" src="./Icons/icons8-running-64.png" /><span
-                                class="running">量測跑步速率：<br />量測您每分鐘跑的公里數</span></a>
-                    </li>
+                <div class="buttons-item">
+                    <ul>
+                        <li><a href="#"><img class="distance"  onclick="divVisibility('Div1');"
+                            src="./Icons/icons8-distance-64.png" /><span>量測距離：<br />量測您移動的距離</span></a>
+                        </li>
+                        <li><a href="#"><img class="footprint" onclick="divVisibility('Div2');"
+                            src="./Icons/icons8-footprint-50.png" /><span>量測步數：<br />量測您行走的步數</span></a>
+                        </li>
+                        <li><a href="#"><img class="temperature" onclick="divVisibility('Div3');"
+                            src="./Icons/icons8-temperature-inside-64.png" /><span>量測溫溼度：<br />量測環境溫濕度是否適宜運動</span></a>
+                        </li>
+                        <li><a href="#"> <img class="heart" onclick="divVisibility('Div4');"
+                            src="./Icons/icons8-heart-64.png" /><span>量測心率：<br />量測您每分鐘的心跳數</span></a>
+                        </li>
+                        <li><a href="#"> <img class="running" onclick="divVisibility('Div5');"
+                            src="./Icons/icons8-running-64.png" /><span>量測跑步速率：<br />量測您每分鐘跑的公里數</span></a>
+                        </li>
+                    </ul>
+                </div>
+                    <div class="features-video">
+                    <div id="Div1" style="display: none;">    
+                    <video class="features-video-item" src="./members/IoT Watch.mp4" type="video/mp4" controls></video>
+                    </div>
+                    <div id="Div2" style="display: none;">    
+                    <video class="features-video-item" src="./members/IoT Watch.mp4" type="video/mp4" controls></video>
+                    </div>
+                    <div id="Div3" style="display: none;">    
+                    <video class="features-video-item" src="./members/IoT Watch.mp4" type="video/mp4" controls></video>
+                    </div>
+                    <div id="Div4" style="display: none;">    
+                    <video class="features-video-item" src="./members/IoT Watch.mp4" type="video/mp4" controls></video>
+                    </div>
+                    <div id="Div5" style="display: none;">    
+                    <video class="features-video-item" src="./members/IoT Watch.mp4" type="video/mp4" controls></video>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- 左邊內容 -->
+            <div class="side">
+                <ul class="side-item">
+                    <li><a href="./devices.php">使用裝備</a></li>
+                    <li><a href="./features.php">功能介紹</a></li>
+                    <li><a href="./members.php">成員介紹</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="side">
-            <ul class="side-item">
-                <li><a href="devices.php">使用裝備</a></li>
-                <li><a href="features.php">功能介紹</a></li>
-                <li><a href="members.php">成員介紹</a></li>
-            </ul>
-        </div>
     </section>
-    <footer>
+
+    <footer class="footer-wrapper">
         <div class="footer-logo">
-            <h1><img class="footer-loge-img" src="./Logo/icons8-intelligent-person-64.png" alt="Logo" />你的健康管家</h1>
+            <h1><img class="footer-loge-img" src="./logo/icons8-intelligent-person-64.png" alt="Logo" />你的健康管家</h1>
         </div>
+
         <nav>
             <ul>
-                <li><a href="#">首頁</a></li>
-                <li><a href="#">裝置介紹</a></li>
-                <li><a href="#">測量圖</a></li>
-                <li><a href="#">影片介紹</a></li>
+                <li><a href="./index.php">首頁</a></li>
+                <li><a href="./features.php">裝置介紹</a></li>
+                <li><a href="./Datacharts.php">測量圖</a></li>
+                <li><a href="./video.php">影片介紹</a></li>
             </ul>
         </nav>
         <section>
@@ -124,6 +148,32 @@
             <span>&nbsp; &nbsp; &copy;IoT Watch版權所有</span>
         </div>
     </footer>
+
+	<script>
+        var divs = ["Div1", "Div2", "Div3", "Div4","Div5"];
+        var visibleDivId = null;
+        function divVisibility(divId) {
+            if(visibleDivId === divId) {
+            visibleDivId = null;
+            } else {
+            visibleDivId = divId;
+            }
+            hideNonVisibleDivs();
+        }
+        function hideNonVisibleDivs() {
+            var i, divId, div;
+            for(i = 0; i < divs.length; i++) {
+            divId = divs[i];
+            div = document.getElementById(divId);
+            if(visibleDivId === divId) {
+                div.style.display = "block";
+            } else {
+                div.style.display = "none";
+            }
+            }
+        }
+    </script>
+
 </body>
 
 </html>

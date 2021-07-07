@@ -159,7 +159,8 @@ void loop()
 
   String httpRequwstData = "api_key=" + apiKeyValue + "&sensor=" + sensorName
                           + "&location=" + sensorLocation + "&Heart_Reat=" + String(beatsPerMinute)
-                          + "&Stride_Cadence=" + String(Stride_Cadence) + "&Velocity=" + String(Velocity) + "&Distance=" + String(Distance) + "";
+                          + "&Stride_Cadence=" + String(Stride_Cadence) + "&Velocity=" + String(Velocity) 
+                          + "&Distance=" + String(Distance) + "";
   
   upload_delta = millis() - upload_sec;
   if(upload_delta >= 1010)

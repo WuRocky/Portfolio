@@ -1,156 +1,162 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart_Reat</title>
+    <title>heart</title>
 </head>
+
 <body>
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/vuetify@2.0.10/dist/vuetify.min.css" />
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
-  
-  <script src="https://cdn.jsdelivr.net/npm/babel-regenerator-runtime@6.5.0/runtime.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.0.10/dist/vuetify.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  <script src="https://unpkg.com/vue-chartjs@3.4.0/dist/vue-chartjs.js"></script>
-  
-  <div id="app">
-    <v-row dense>
-        <v-col cols="sm">
-            <v-card class="pa-2" outlined tile raised>
-                <my-line-chart v-if="ChartConfig.labels.length"  :line-data="ChartConfig" :chart-options="options"></my-line-chart>
-            </v-card>
-        </v-col>
-    </v-row>
-    <v-row no-gutters>
-        <v-col cols="sm">
-            <v-card class="pa-2" outlined tile raised>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/vuetify@2.0.10/dist/vuetify.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
 
-            </v-card>
-        </v-col>
-    </v-row>
-  </div>
-  
+    <script src="https://cdn.jsdelivr.net/npm/babel-regenerator-runtime@6.5.0/runtime.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.0.10/dist/vuetify.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs@3.4.0/dist/vue-chartjs.js"></script>
 
-Vue.component('my-line-chart', {
-    extends: VueChartJs.Line,
-    props: ['lineData', 'chartOptions'],
-    mounted(){
-      this.renderChart(this.lineData, this.chartOptions);
-    }/*,
-    watch:{
-      lineData () {
-        this.renderChart(this.lineData, this.chartOptions);
-    },
-      chartOptions () {
-        this.renderChart(this.lineData, this.chartOptions);
-    }
-    } */
-}, {
-      responsive: true, 
-      maintainAspectRatio: false
-    })
+    <div id="app">
+        <v-row dense>
+            <v-col cols="sm">
+                <v-card class="pa-2" outlined tile raised>
+                    <my-line-chart v-if="ChartConfig.labels.length" :line-data="ChartConfig" :chart-options="options">
+                    </my-line-chart>
+                </v-card>
+            </v-col>
+        </v-row>
+        <v-row no-gutters>
+            <v-col cols="sm">
+                <v-card class="pa-2" outlined tile raised>
 
-new Vue({
-  el: "#app",
-  vuetify: new Vuetify(),
-  data() {
-    return {
-    ChartConfig: {
-      labels: [],
-      datasets: [
+                </v-card>
+            </v-col>
+        </v-row>
+    </div>
+
+
+    <script>
+
+        Vue.component('my-line-chart', 
         {
-          data: [],
-          backgroundColor: '#3498db',
-          borderColor: 'rgba(136,136,136,0.5)',
-          label: "Heart Rate"
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
+            extends: VueChartJs.Line,
+            props: ['lineData', 'chartOptions'],
+            mounted() {
+                this.renderChart(this.lineData, this.chartOptions);
+            }/*,
+                watch:{
+                    lineData () {
+                    this.renderChart(this.lineData, this.chartOptions);
+                },
+                    chartOptions () {
+                    this.renderChart(this.lineData, this.chartOptions);
+                }
+                } */
+        }, {
+            responsive: true,
+            maintainAspectRatio: false
+        })
 
-      
-      title: {
-        display: true,
-        text: '',
-      },
-      tooltips: {
-        mode: 'index',
-        intersect: false,
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
-      },
-      scales: {
-        xAxes: [{
-          display: true,
-          categoryPercentage: 0.5,
-          scaleLabel: {
-            display: true,
-            labelString: '時間'
-          }
-        }],
-        yAxes: [{
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: '心率'
-          }
-        }]
-      }
-    },
-    iceCream: [],
-    drawer: false
-  }
-  },
-  mounted: function () {
-    this.getListData();
-  },
-  methods: {
-    getListData: async function () {
+        new Vue({
+            el: "#app",
+            vuetify: new Vuetify(),
+            data() {
+                return {
+                    ChartConfig: {
+                        labels: [],
+                        datasets: [
+                            {
+                                data: [],
+                                backgroundColor: '#3498db',
+                                borderColor: 'rgba(136,136,136,0.5)',
+                                label: "Heart Rate"
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
 
-      this.status = "getting data...";
-     // var that = this;
-            
-        // await axios.get("https://34.92.111.145/charttest.php").then((response) => {
-        await axios.get("https://34.92.111.145/DataPHP/heart.php").then((response) => {
-        console.log(response.data)
-        this.getChartData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    },
-    getChartData: function (chartData) {
-      //console.log(chartData);
-      for (var i = 0; i < chartData.length; i++) 
-      {
-        this.ChartConfig.labels.push(chartData[i].id)
-        //this.$set(this.ChartConfig.labels,i,chartData[i].Flavor)
-      }
 
-      for (var i = 0; i < chartData.length; i++) 
-      {
-        this.ChartConfig.datasets[0].data.push(chartData[i].Heart_Rate)
-        //this.$set(this.ChartConfig.labels,i,chartData[i].Vote)
-      }
-    console.log(this.ChartConfig);
-    }
-  }
-});
+                        title: 
+                        {
+                            display: true,
+                            text: '',
+                        },
+                        tooltips: 
+                        {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: 
+                        {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                categoryPercentage: 2.5,
+                                scaleLabel: 
+                                {
+                                    display: true,
+                                    labelString: 'time(s)'
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: 
+                                {
+                                    display: true,
+                                    labelString: 'bpm'
+                                }
+                            }]
+                        }
+                    },
+                    iceCream: [],
+                    drawer: false
+                }
+            },
+            mounted: function () {
+                this.getListData();
+            },
+            methods: {
+                getListData: async function () {
 
-</script>
+                    this.status = "getting data...";
+                    // var that = this;
+
+                    // await axios.get("https://34.92.111.145/charttest.php").then((response) => {
+                    await axios.get("./heart.php").then((response) => {
+                        console.log(response.data)
+                        this.getChartData(response.data);
+                    })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                getChartData: function (chartData) {
+                    //console.log(chartData);
+                    for (var i = 0; i < chartData.length; i++) {
+                        this.ChartConfig.labels.push(chartData[i].Reading_time)
+                        //this.$set(this.ChartConfig.labels,i,chartData[i].Flavor)
+                    }
+
+                    for (var i = 0; i < chartData.length; i++) {
+                        this.ChartConfig.datasets[0].data.push(chartData[i].Heart_Rate)
+                        //this.$set(this.ChartConfig.labels,i,chartData[i].Vote)
+                    }
+                    console.log(this.ChartConfig);
+                }
+            }
+        });
+
+    </script>

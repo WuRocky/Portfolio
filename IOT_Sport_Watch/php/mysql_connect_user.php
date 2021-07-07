@@ -4,7 +4,7 @@ session_start();
 //寫入使用者帳號，此帳號哪裡來請看login_regis.php
 $account = $_SESSION['username'];
 //定義常量，定義後無法做更動
-define('DB_SERVER', '127.0.0.1');
+define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'SD89bK8vC5Pi');
 define('DB_NAME_USER', "$account");

@@ -71,7 +71,7 @@ long upload_delta = 0;
 
 const char* serverName = "http://34.92.111.145/demo.php"; //準備上傳到伺服器端的網址名稱"http://34.92.111.145"為伺服器ip所在，"/insertData.php"為準備執行的php檔
 String upload_str = "";
-String sensorName = "IOT-watch002";
+String sensorName = "IOT-watch001";
 String sensorLocation = "Outdoor";
 /////////////////////////////////////////////^^^upload^^^//////////////////////////////////////////
 #define buzzerPin 18
